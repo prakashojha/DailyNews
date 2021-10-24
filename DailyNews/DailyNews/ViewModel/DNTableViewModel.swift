@@ -10,6 +10,7 @@ import Foundation
 class DNTableViewModel{
     
     var model: DNTableModel!
+    var coordinator: TableViewCoordinator?
     
     init(model: DNTableModel){
         self.model = model
@@ -79,5 +80,15 @@ class DNTableViewModel{
                 completion()
             }
         }
+    }
+    
+    func loadWebPage(url: URL?)->String{
+        if let url = url{
+            coordinator?.loadWebPage(url: url)
+        } else {
+            return "INVALID URL"
+        }
+        
+        return "OK"
     }
 }

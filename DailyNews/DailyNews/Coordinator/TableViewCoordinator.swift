@@ -20,6 +20,13 @@ final class TableViewCoordinator: Coordinator{
         let tableModel = DNTableModel()
         let dnTableViewViewModel = DNTableViewModel(model: tableModel)
         viewController.tableViewModel = dnTableViewViewModel
+        dnTableViewViewModel.coordinator = self
         navigationController.setViewControllers([viewController], animated: false)
+    }
+    
+    func loadWebPage(url: URL){
+        let loadWebPageCoordinator = LoadWebPageCoordinator(navigationController: navigationController, url: url)
+        childCoordinators.append(loadWebPageCoordinator)
+        loadWebPageCoordinator.start()
     }
 }

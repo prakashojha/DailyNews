@@ -113,4 +113,9 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate{
         }
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let news = tableViewModel.tableData[indexPath.row]
+        guard let url = URL(string: news.url) else { return }
+        _ = tableViewModel.loadWebPage(url: url)
+    }
 }
