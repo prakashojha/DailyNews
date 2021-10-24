@@ -65,7 +65,7 @@ class DNTableViewModel{
             case .success(let newsData):
                 let data = newsData.map(DNCellViewModel.init)
                 DispatchQueue.main.async{
-                    self.tableData = data
+                    self.tableData.append(contentsOf: data)
                     completion(true)
                 }
             case .failure( _):
