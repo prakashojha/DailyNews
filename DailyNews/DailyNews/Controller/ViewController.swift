@@ -29,12 +29,14 @@ class ViewController: UIViewController {
         if let flag = tableView.refreshControl?.isRefreshing , flag == true{
             self.tableViewModel.tableData.removeAll()
         }
-        tableViewModel.fetchNewsData {[unowned self] in
-            DispatchQueue.main.async {
-                tableView.refreshControl?.endRefreshing()
-                self.tableView.reloadData()
-                self.tableViewModel.isPaginating = false
-                self.tableView.tableFooterView = nil
+        tableViewModel.fetchNewsData {[unowned self] (status)in
+            if status{
+                DispatchQueue.main.async {
+                    tableView.refreshControl?.endRefreshing()
+                    self.tableView.reloadData()
+                    self.tableViewModel.isPaginating = false
+                    self.tableView.tableFooterView = nil
+                }
             }
         }
     }

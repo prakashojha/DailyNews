@@ -24,6 +24,8 @@
 		F4ACBB2027256F0D0001B6A0 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4ACBB1F27256F0D0001B6A0 /* AppCoordinator.swift */; };
 		F4ACBB25272570470001B6A0 /* TableViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4ACBB24272570470001B6A0 /* TableViewCoordinator.swift */; };
 		F4ACBB2D272571E00001B6A0 /* LoadWebPageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4ACBB2C272571E00001B6A0 /* LoadWebPageCoordinator.swift */; };
+		F4ACBB352725771F0001B6A0 /* DailyNewsNetworkTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4ACBB342725771F0001B6A0 /* DailyNewsNetworkTest.swift */; };
+		F4ACBB3A272577720001B6A0 /* DailyNewsTableViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4ACBB39272577720001B6A0 /* DailyNewsTableViewModelTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +69,8 @@
 		F4ACBB1F27256F0D0001B6A0 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		F4ACBB24272570470001B6A0 /* TableViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCoordinator.swift; sourceTree = "<group>"; };
 		F4ACBB2C272571E00001B6A0 /* LoadWebPageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadWebPageCoordinator.swift; sourceTree = "<group>"; };
+		F4ACBB342725771F0001B6A0 /* DailyNewsNetworkTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyNewsNetworkTest.swift; sourceTree = "<group>"; };
+		F4ACBB39272577720001B6A0 /* DailyNewsTableViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyNewsTableViewModelTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +141,8 @@
 			children = (
 				F4ACBAB72725133C0001B6A0 /* DailyNewsTests.swift */,
 				F4ACBAB92725133C0001B6A0 /* Info.plist */,
+				F4ACBB342725771F0001B6A0 /* DailyNewsNetworkTest.swift */,
+				F4ACBB39272577720001B6A0 /* DailyNewsTableViewModelTest.swift */,
 			);
 			path = DailyNewsTests;
 			sourceTree = "<group>";
@@ -353,6 +359,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4ACBAB82725133C0001B6A0 /* DailyNewsTests.swift in Sources */,
+				F4ACBB352725771F0001B6A0 /* DailyNewsNetworkTest.swift in Sources */,
+				F4ACBB3A272577720001B6A0 /* DailyNewsTableViewModelTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

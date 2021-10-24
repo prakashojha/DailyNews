@@ -43,12 +43,10 @@ final class DNCellView: UITableViewCell{
         
     private lazy var cellTitle: UILabel = {
         let headLine = UILabel()
-        headLine.text = "Headline"
         headLine.textAlignment = .left
         headLine.numberOfLines = 2
         headLine.font = UIFont.boldSystemFont(ofSize: 17)
         headLine.sizeToFit()
-        //headLine.lineBreakMode = .byTruncatingTail
         return headLine
     }()
     
@@ -58,7 +56,6 @@ final class DNCellView: UITableViewCell{
         subHeading.numberOfLines = 0
         subHeading.font = UIFont.systemFont(ofSize: 13)
         subHeading.sizeToFit()
-        subHeading.text = "Sub Heading"
         return subHeading
     }()
     
@@ -67,7 +64,6 @@ final class DNCellView: UITableViewCell{
         image.clipsToBounds = true
         image.contentMode = .scaleAspectFill
         image.layer.cornerRadius = 10
-        image.image = UIImage(named: "dummy")
         return image
     }()
     
@@ -95,12 +91,10 @@ final class DNCellView: UITableViewCell{
     func setupHeadLineConstraint(){
         cellTitle.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            cellTitle.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            cellTitle.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            cellTitle.topAnchor.constraint(equalTo: topAnchor, constant: 2),
+            cellTitle.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
+            cellTitle.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
+            cellTitle.topAnchor.constraint(equalTo: topAnchor, constant: 5),
             cellTitle.bottomAnchor.constraint(lessThanOrEqualTo: cellDescription.topAnchor)
-            //cellTitle.bottomAnchor.constraint(equalTo: cellDescription.topAnchor, constant: 2)
-            
             ]
         )
     }
@@ -108,8 +102,8 @@ final class DNCellView: UITableViewCell{
     func setupSubHeadLineConstraint(){
         cellDescription.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            cellDescription.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            cellDescription.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            cellDescription.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
+            cellDescription.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
             cellDescription.topAnchor.constraint(equalTo: cellTitle.bottomAnchor, constant: 0)
             ]
         )
@@ -118,10 +112,10 @@ final class DNCellView: UITableViewCell{
     func setupImageConstraint(){
         cellImage.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            cellImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            cellImage.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            cellImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
+            cellImage.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
             cellImage.topAnchor.constraint(equalTo: cellDescription.bottomAnchor, constant: 5),
-            cellImage.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
+            cellImage.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15),
             cellImage.heightAnchor.constraint(equalToConstant: 200)
             ]
         )

@@ -67,17 +67,17 @@ class DNTableViewModel{
         }
     }
     
-    func fetchNewsData(completion: @escaping ()->Void){
+    func fetchNewsData(completion: @escaping (_ status: Bool)->Void){
         NetworkManager.shared.fetchNews(page: page, urlString: urlString) { [unowned self](result) in
             switch(result){
             case .success(let newsData):
                 let data = newsData.map(DNCellViewModel.init)
                 DispatchQueue.main.async{
                     self.tableData = data
-                    completion()
+                    completion(true)
                 }
             case .failure( _):
-                completion()
+                completion(false)
             }
         }
     }
