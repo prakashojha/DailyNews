@@ -38,10 +38,9 @@ class ViewController: UIViewController {
     func setupNavigationView(){
         let bounds = self.navigationController!.navigationBar.bounds
         let lable = UILabel(frame: CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height))
-        lable.text = "Daily News"
-        lable.font = UIFont(name: "BodoniSvtyTwoSCITCTT-Book", size: 32)
+        lable.text = tableViewModel.headerTitle
+        lable.font = UIFont(name: tableViewModel.headerFontName, size: CGFloat(tableViewModel.headerFontSize))
         lable.textAlignment = .center
-        
         self.navigationController?.navigationBar.backgroundColor = .cyan
         self.navigationItem.titleView = lable
     }

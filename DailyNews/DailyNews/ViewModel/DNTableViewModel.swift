@@ -24,6 +24,10 @@ class DNTableViewModel{
         }
     }
     
+    var cellIndetifier: String{
+        return model.cellIndetifier
+    }
+    
     var page: Int{
         set{
             model.page = newValue
@@ -33,10 +37,34 @@ class DNTableViewModel{
         }
     }
     
+    var headerTitle: String{
+        return model.headerTitle
+    }
+    
+    var headerFontName: String{
+        return model.headerFontName
+    }
+    
+    var headerFontSize: Int{
+        return model.headerFontSize
+    }
+    
     var urlString: String{
         return model.urlString
     }
     
+    var cellRowHeight: Int{
+        return model.cellRowHeight
+    }
+    
+    var isPaginating: Bool{
+        set {
+            model.isPaginating = newValue
+        }
+        get{
+            return model.isPaginating
+        }
+    }
     
     func fetchNewsData(completion: @escaping ()->Void){
         NetworkManager.shared.fetchNews(page: page, urlString: urlString) { [unowned self](result) in
