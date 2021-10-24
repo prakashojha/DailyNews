@@ -30,10 +30,11 @@ class ViewController: UIViewController {
         tableViewModel.fetchNewsData {[unowned self] in
             DispatchQueue.main.async {
                 self.tableView.reloadData()
+                self.tableViewModel.isPaginating = false
+                self.tableView.tableFooterView = nil
             }
         }
     }
-    
     
     func setupNavigationView(){
         let bounds = self.navigationController!.navigationBar.bounds
@@ -48,7 +49,7 @@ class ViewController: UIViewController {
     func setupTableView(){
         tableView = UITableView()
         view.addSubview(tableView)
-        tableView.rowHeight = CGFloat(300)
+        tableView.rowHeight = CGFloat(tableViewModel.cellRowHeight)
         tableView.register(DNCellView.self, forCellReuseIdentifier: "Cell")
         tableView.separatorStyle = .singleLine
         tableView.delegate = self
@@ -64,6 +65,18 @@ class ViewController: UIViewController {
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
+    
+    func CreateLoadingFooter()->UIView{
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 100))
+        
+        let spinner = UIActivityIndicatorView()
+        spinner.style = .large
+        spinner.center = footerView.center
+        
+        footerView.addSubview(spinner)
+        spinner.startAnimating()
+        return footerView
+    }
 }
 
 extension ViewController: UITableViewDataSource, UITableViewDelegate{
@@ -76,6 +89,16 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate{
         cell?.cellViewModel = tableViewModel.tableData[indexPath.row]
         return cell ?? UITableViewCell()
         
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let lastItem = tableViewModel.tableData.count - 1
+        if indexPath.row == lastItem && !tableViewModel.isPaginating{
+            tableViewModel.isPaginating = true
+            tableViewModel.page += 1
+            self.tableView.tableFooterView = CreateLoadingFooter()
+            fetchData()
+        }
     }
     
 }
