@@ -37,7 +37,7 @@ class ViewController: UIViewController {
         tableView = UITableView()
         view.addSubview(tableView)
         tableView.rowHeight = CGFloat(400)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.register(DNCellView.self, forCellReuseIdentifier: "Cell")
         tableView.separatorStyle = .singleLine
         tableView.delegate = self
         tableView.dataSource = self
@@ -60,10 +60,8 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as UITableViewCell
-        cell.backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
-        cell.backgroundView?.backgroundColor = .yellow
-        return cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? DNCellView
+        return cell ?? UITableViewCell()
         
     }
     

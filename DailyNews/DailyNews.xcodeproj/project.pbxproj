@@ -16,6 +16,7 @@
 		F4ACBAC32725133C0001B6A0 /* DailyNewsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4ACBAC22725133C0001B6A0 /* DailyNewsUITests.swift */; };
 		F4ACBAE1272530EA0001B6A0 /* DNNewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4ACBAE0272530EA0001B6A0 /* DNNewsModel.swift */; };
 		F4ACBAEF272531880001B6A0 /* DNNetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4ACBAEE272531880001B6A0 /* DNNetworkModel.swift */; };
+		F4ACBAFF2725437F0001B6A0 /* DNCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4ACBAFE2725437F0001B6A0 /* DNCellView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		F4ACBAC42725133C0001B6A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F4ACBAE0272530EA0001B6A0 /* DNNewsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNNewsModel.swift; sourceTree = "<group>"; };
 		F4ACBAEE272531880001B6A0 /* DNNetworkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNNetworkModel.swift; sourceTree = "<group>"; };
+		F4ACBAFE2725437F0001B6A0 /* DNCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNCellView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 		F4ACBA9F272513300001B6A0 /* DailyNews */ = {
 			isa = PBXGroup;
 			children = (
+				F4ACBAFD272543580001B6A0 /* View */,
 				F4ACBAF6272537360001B6A0 /* Controller */,
 				F4ACBAE5272531330001B6A0 /* Service */,
 				F4ACBADC27252F1B0001B6A0 /* Model */,
@@ -153,6 +156,14 @@
 				F4ACBAA4272513300001B6A0 /* ViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		F4ACBAFD272543580001B6A0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F4ACBAFE2725437F0001B6A0 /* DNCellView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -288,6 +299,7 @@
 				F4ACBAE1272530EA0001B6A0 /* DNNewsModel.swift in Sources */,
 				F4ACBAA5272513300001B6A0 /* ViewController.swift in Sources */,
 				F4ACBAA1272513300001B6A0 /* AppDelegate.swift in Sources */,
+				F4ACBAFF2725437F0001B6A0 /* DNCellView.swift in Sources */,
 				F4ACBAA3272513300001B6A0 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
