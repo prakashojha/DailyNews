@@ -16,7 +16,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         fetchData()
-        
     }
 
     func setupView(){
@@ -28,14 +27,15 @@ class ViewController: UIViewController {
     func fetchData(){
         if let flag = tableView.refreshControl?.isRefreshing , flag == true{
             self.tableViewModel.tableData.removeAll()
+            NetworkManager.shared.cachedImage.removeAllObjects()
         }
         tableViewModel.fetchNewsData {[unowned self] (status)in
             if status{
                 DispatchQueue.main.async {
-                    tableView.refreshControl?.endRefreshing()
                     self.tableView.reloadData()
                     self.tableViewModel.isPaginating = false
                     self.tableView.tableFooterView = nil
+                    tableView.refreshControl?.endRefreshing()
                 }
             }
         }

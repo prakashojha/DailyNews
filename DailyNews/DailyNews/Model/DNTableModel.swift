@@ -8,7 +8,6 @@
 import Foundation
 
 struct DNTableModel{
-    var cellViewModel: [DNCellViewModel] = []
     var cellIndetifier: String! = "NewsCell"
     var page = 1
     var cellRowHeight = 300

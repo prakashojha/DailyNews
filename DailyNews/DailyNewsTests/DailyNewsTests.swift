@@ -51,14 +51,5 @@ class DailyNewsTests: XCTestCase {
         XCTAssertEqual(article.publishedAt, cellViewModel.publishedAt)
     }
     
-    func test_table_data(){
-        var tableModel = DNTableModel()
-        tableModel.cellViewModel = [DNCellViewModel(article: article)]
-        
-        let tableViewModel = DNTableViewModel(model: tableModel)
-        
-        XCTAssertEqual(tableModel.cellViewModel.description, tableViewModel.tableData.description)
-        
-    }
 
 }

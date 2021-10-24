@@ -11,18 +11,10 @@ class DNTableViewModel{
     
     var model: DNTableModel!
     var coordinator: TableViewCoordinator?
+    var tableData: [DNCellViewModel] = []
     
     init(model: DNTableModel){
         self.model = model
-    }
-    
-    var tableData: [DNCellViewModel] {
-        set(newValue){
-            model.cellViewModel.append(contentsOf: newValue)
-        }
-        get{
-            return model.cellViewModel
-        }
     }
     
     var cellIndetifier: String{
