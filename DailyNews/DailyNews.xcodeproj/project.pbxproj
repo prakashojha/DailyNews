@@ -14,6 +14,8 @@
 		F4ACBAAD2725133C0001B6A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4ACBAAB2725133C0001B6A0 /* LaunchScreen.storyboard */; };
 		F4ACBAB82725133C0001B6A0 /* DailyNewsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4ACBAB72725133C0001B6A0 /* DailyNewsTests.swift */; };
 		F4ACBAC32725133C0001B6A0 /* DailyNewsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4ACBAC22725133C0001B6A0 /* DailyNewsUITests.swift */; };
+		F4ACBAE1272530EA0001B6A0 /* DNNewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4ACBAE0272530EA0001B6A0 /* DNNewsModel.swift */; };
+		F4ACBAEF272531880001B6A0 /* DNNetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4ACBAEE272531880001B6A0 /* DNNetworkModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,8 @@
 		F4ACBABE2725133C0001B6A0 /* DailyNewsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DailyNewsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4ACBAC22725133C0001B6A0 /* DailyNewsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyNewsUITests.swift; sourceTree = "<group>"; };
 		F4ACBAC42725133C0001B6A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F4ACBAE0272530EA0001B6A0 /* DNNewsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNNewsModel.swift; sourceTree = "<group>"; };
+		F4ACBAEE272531880001B6A0 /* DNNetworkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNNetworkModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +101,7 @@
 		F4ACBA9F272513300001B6A0 /* DailyNews */ = {
 			isa = PBXGroup;
 			children = (
+				F4ACBAE5272531330001B6A0 /* Service */,
 				F4ACBADC27252F1B0001B6A0 /* Model */,
 				F4ACBAA0272513300001B6A0 /* AppDelegate.swift */,
 				F4ACBAA2272513300001B6A0 /* SceneDelegate.swift */,
@@ -129,8 +134,17 @@
 		F4ACBADC27252F1B0001B6A0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F4ACBAE0272530EA0001B6A0 /* DNNewsModel.swift */,
+				F4ACBAEE272531880001B6A0 /* DNNetworkModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		F4ACBAE5272531330001B6A0 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,6 +276,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4ACBAEF272531880001B6A0 /* DNNetworkModel.swift in Sources */,
+				F4ACBAE1272530EA0001B6A0 /* DNNewsModel.swift in Sources */,
 				F4ACBAA5272513300001B6A0 /* ViewController.swift in Sources */,
 				F4ACBAA1272513300001B6A0 /* AppDelegate.swift in Sources */,
 				F4ACBAA3272513300001B6A0 /* SceneDelegate.swift in Sources */,
