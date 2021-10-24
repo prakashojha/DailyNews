@@ -10,10 +10,14 @@ import UIKit
 class ViewController: UIViewController {
 
     var tableView: UITableView!
+    var tableViewModel: DNTableViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableViewModel = DNTableViewModel(model: DNTableModel())
         setupView()
+        fetchData()
+        
     }
 
     func setupView(){
@@ -21,6 +25,15 @@ class ViewController: UIViewController {
         setupTableView()
         setupConstraints()
     }
+    
+    func fetchData(){
+        tableViewModel.fetchNewsData {[unowned self] in
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
     
     func setupNavigationView(){
         let bounds = self.navigationController!.navigationBar.bounds
@@ -36,7 +49,7 @@ class ViewController: UIViewController {
     func setupTableView(){
         tableView = UITableView()
         view.addSubview(tableView)
-        tableView.rowHeight = CGFloat(400)
+        tableView.rowHeight = CGFloat(300)
         tableView.register(DNCellView.self, forCellReuseIdentifier: "Cell")
         tableView.separatorStyle = .singleLine
         tableView.delegate = self
@@ -56,11 +69,12 @@ class ViewController: UIViewController {
 
 extension ViewController: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return tableViewModel.tableData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? DNCellView
+        cell?.cellViewModel = tableViewModel.tableData[indexPath.row]
         return cell ?? UITableViewCell()
         
     }

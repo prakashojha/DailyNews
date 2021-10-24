@@ -9,14 +9,46 @@ import UIKit
 
 final class DNCellView: UITableViewCell{
     
-    
+    var cellViewModel:DNCellViewModel?{
+        didSet{
+            if let cellData = cellViewModel{
+                cellTitle.text = cellData.title
+                cellDescription.text = cellData.description
+                if let imageURL = cellData.urlToImage{
+                    NetworkManager.shared.fetchImage(imageURL: imageURL) { [unowned self] (data) in
+                        if let data = data, !data.isEmpty{
+                            self.imageData = data
+                        }
+                        else{
+                            self.imageData = UIImage(named: "dummy")?.pngData()
+                        }
+                    }
+                }
+                else{
+                    imageData = UIImage(named: "dummy")?.pngData()
+                }
+            }
+        }
+    }
+        
+    var imageData: Data?{
+        didSet{
+            if let imageData = imageData{
+                DispatchQueue.main.async {
+                    self.cellImage.image = UIImage(data: imageData)
+                }
+            }
+        }
+    }
+        
     private lazy var cellTitle: UILabel = {
         let headLine = UILabel()
+        headLine.text = "Headline"
         headLine.textAlignment = .left
         headLine.numberOfLines = 2
         headLine.font = UIFont.boldSystemFont(ofSize: 17)
         headLine.sizeToFit()
-        headLine.text = " Headline"
+        //headLine.lineBreakMode = .byTruncatingTail
         return headLine
     }()
     
@@ -26,7 +58,7 @@ final class DNCellView: UITableViewCell{
         subHeading.numberOfLines = 0
         subHeading.font = UIFont.systemFont(ofSize: 13)
         subHeading.sizeToFit()
-        subHeading.text = "SubHeading"
+        subHeading.text = "Sub Heading"
         return subHeading
     }()
     
@@ -66,6 +98,9 @@ final class DNCellView: UITableViewCell{
             cellTitle.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             cellTitle.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             cellTitle.topAnchor.constraint(equalTo: topAnchor, constant: 2),
+            cellTitle.bottomAnchor.constraint(lessThanOrEqualTo: cellDescription.topAnchor)
+            //cellTitle.bottomAnchor.constraint(equalTo: cellDescription.topAnchor, constant: 2)
+            
             ]
         )
     }
@@ -75,8 +110,7 @@ final class DNCellView: UITableViewCell{
         NSLayoutConstraint.activate([
             cellDescription.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             cellDescription.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            cellDescription.topAnchor.constraint(equalTo: cellTitle.bottomAnchor, constant: 0),
-            cellDescription.bottomAnchor.constraint(equalTo: cellImage.topAnchor, constant: 0),
+            cellDescription.topAnchor.constraint(equalTo: cellTitle.bottomAnchor, constant: 0)
             ]
         )
     }

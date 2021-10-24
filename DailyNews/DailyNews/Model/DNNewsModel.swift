@@ -18,7 +18,6 @@ struct News: Decodable{
     let url: String?
     let urlToImage: String?
     let publishedAt: String?
-    
 }
 
 extension News {

@@ -17,6 +17,10 @@
 		F4ACBAE1272530EA0001B6A0 /* DNNewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4ACBAE0272530EA0001B6A0 /* DNNewsModel.swift */; };
 		F4ACBAEF272531880001B6A0 /* DNNetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4ACBAEE272531880001B6A0 /* DNNetworkModel.swift */; };
 		F4ACBAFF2725437F0001B6A0 /* DNCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4ACBAFE2725437F0001B6A0 /* DNCellView.swift */; };
+		F4ACBB0827255A780001B6A0 /* DNCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4ACBB0727255A780001B6A0 /* DNCellViewModel.swift */; };
+		F4ACBB0D27255CF00001B6A0 /* DNTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4ACBB0C27255CF00001B6A0 /* DNTableViewModel.swift */; };
+		F4ACBB1227255EAA0001B6A0 /* DNTableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4ACBB1127255EAA0001B6A0 /* DNTableModel.swift */; };
+		F4ACBB17272560B00001B6A0 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4ACBB16272560B00001B6A0 /* NetworkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +57,10 @@
 		F4ACBAE0272530EA0001B6A0 /* DNNewsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNNewsModel.swift; sourceTree = "<group>"; };
 		F4ACBAEE272531880001B6A0 /* DNNetworkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNNetworkModel.swift; sourceTree = "<group>"; };
 		F4ACBAFE2725437F0001B6A0 /* DNCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNCellView.swift; sourceTree = "<group>"; };
+		F4ACBB0727255A780001B6A0 /* DNCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNCellViewModel.swift; sourceTree = "<group>"; };
+		F4ACBB0C27255CF00001B6A0 /* DNTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNTableViewModel.swift; sourceTree = "<group>"; };
+		F4ACBB1127255EAA0001B6A0 /* DNTableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNTableModel.swift; sourceTree = "<group>"; };
+		F4ACBB16272560B00001B6A0 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +111,7 @@
 		F4ACBA9F272513300001B6A0 /* DailyNews */ = {
 			isa = PBXGroup;
 			children = (
+				F4ACBB0627255A570001B6A0 /* ViewModel */,
 				F4ACBAFD272543580001B6A0 /* View */,
 				F4ACBAF6272537360001B6A0 /* Controller */,
 				F4ACBAE5272531330001B6A0 /* Service */,
@@ -139,6 +148,7 @@
 			children = (
 				F4ACBAE0272530EA0001B6A0 /* DNNewsModel.swift */,
 				F4ACBAEE272531880001B6A0 /* DNNetworkModel.swift */,
+				F4ACBB1127255EAA0001B6A0 /* DNTableModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -146,6 +156,7 @@
 		F4ACBAE5272531330001B6A0 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				F4ACBB16272560B00001B6A0 /* NetworkManager.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -164,6 +175,15 @@
 				F4ACBAFE2725437F0001B6A0 /* DNCellView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		F4ACBB0627255A570001B6A0 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				F4ACBB0727255A780001B6A0 /* DNCellViewModel.swift */,
+				F4ACBB0C27255CF00001B6A0 /* DNTableViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -297,10 +317,14 @@
 			files = (
 				F4ACBAEF272531880001B6A0 /* DNNetworkModel.swift in Sources */,
 				F4ACBAE1272530EA0001B6A0 /* DNNewsModel.swift in Sources */,
+				F4ACBB17272560B00001B6A0 /* NetworkManager.swift in Sources */,
 				F4ACBAA5272513300001B6A0 /* ViewController.swift in Sources */,
 				F4ACBAA1272513300001B6A0 /* AppDelegate.swift in Sources */,
+				F4ACBB0827255A780001B6A0 /* DNCellViewModel.swift in Sources */,
 				F4ACBAFF2725437F0001B6A0 /* DNCellView.swift in Sources */,
 				F4ACBAA3272513300001B6A0 /* SceneDelegate.swift in Sources */,
+				F4ACBB1227255EAA0001B6A0 /* DNTableModel.swift in Sources */,
+				F4ACBB0D27255CF00001B6A0 /* DNTableViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
