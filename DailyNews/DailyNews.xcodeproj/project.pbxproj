@@ -97,6 +97,7 @@
 		F4ACBA9F272513300001B6A0 /* DailyNews */ = {
 			isa = PBXGroup;
 			children = (
+				F4ACBADC27252F1B0001B6A0 /* Model */,
 				F4ACBAA0272513300001B6A0 /* AppDelegate.swift */,
 				F4ACBAA2272513300001B6A0 /* SceneDelegate.swift */,
 				F4ACBAA4272513300001B6A0 /* ViewController.swift */,
@@ -123,6 +124,13 @@
 				F4ACBAC42725133C0001B6A0 /* Info.plist */,
 			);
 			path = DailyNewsUITests;
+			sourceTree = "<group>";
+		};
+		F4ACBADC27252F1B0001B6A0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
