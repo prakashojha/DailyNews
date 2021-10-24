@@ -27,8 +27,12 @@ class ViewController: UIViewController {
     }
     
     func fetchData(){
+        if let flag = tableView.refreshControl?.isRefreshing , flag == true{
+            self.tableViewModel.tableData.removeAll()
+        }
         tableViewModel.fetchNewsData {[unowned self] in
             DispatchQueue.main.async {
+                tableView.refreshControl?.endRefreshing()
                 self.tableView.reloadData()
                 self.tableViewModel.isPaginating = false
                 self.tableView.tableFooterView = nil
@@ -54,6 +58,15 @@ class ViewController: UIViewController {
         tableView.separatorStyle = .singleLine
         tableView.delegate = self
         tableView.dataSource = self
+        
+        tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.addTarget(self,
+                                            action: #selector(didPullToRefresh),
+                                            for: .valueChanged)
+    }
+    
+    @objc func didPullToRefresh(){
+        fetchData()
     }
     
     func setupConstraints(){
