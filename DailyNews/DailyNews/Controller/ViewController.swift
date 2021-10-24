@@ -14,7 +14,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableViewModel = DNTableViewModel(model: DNTableModel())
         setupView()
         fetchData()
         
