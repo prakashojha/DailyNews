@@ -105,13 +105,18 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate{
         
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let lastItem = tableViewModel.tableData.count - 1
-        if indexPath.row == lastItem && !tableViewModel.isPaginating{
-            tableViewModel.isPaginating = true
-            tableViewModel.page += 1
-            self.tableView.tableFooterView = CreateLoadingFooter()
-            fetchData()
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if scrollView == tableView{
+            if ((scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height){
+                if !tableViewModel.isPaginating {
+                    tableViewModel.isPaginating = true
+                    tableViewModel.page += 1
+                    self.tableView.tableFooterView = CreateLoadingFooter()
+                    fetchData()
+                    
+                }
+            }
+            
         }
     }
     

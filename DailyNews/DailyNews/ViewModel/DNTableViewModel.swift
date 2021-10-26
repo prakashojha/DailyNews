@@ -59,6 +59,16 @@ class DNTableViewModel{
         }
     }
     
+    func removeDuplicates() {
+        var result = [DNCellViewModel]()
+        for value in self.tableData {
+            if !(result.contains(where: {$0.title.lowercased() == value.title.lowercased()})){
+                result.append(value)
+            }
+        }
+        self.tableData = result
+    }
+    
     func fetchNewsData(completion: @escaping (_ status: Bool)->Void){
         NetworkManager.shared.fetchNews(page: page, urlString: urlString) { [unowned self](result) in
             switch(result){
@@ -66,6 +76,7 @@ class DNTableViewModel{
                 let data = newsData.map(DNCellViewModel.init)
                 DispatchQueue.main.async{
                     self.tableData.append(contentsOf: data)
+                    removeDuplicates()
                     completion(true)
                 }
             case .failure( _):

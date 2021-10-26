@@ -73,5 +73,26 @@ class DailyNewsTableViewModelTest: XCTestCase {
         
         XCTAssertEqual(tableViewModel.isPaginating, false)
     }
+    
+    func test_removeDuplicates(){
+        let articles = [
+            DNCellViewModel(article: News(author: "bindu", title: "Testing saves the world", description: "Nothing", url: nil, urlToImage: nil, publishedAt: nil)),
+            DNCellViewModel(article:News(author: "bindu", title: "World is enough", description: nil, url: nil, urlToImage: nil, publishedAt: nil)),
+            DNCellViewModel(article:News(author: "prakash", title: "No-Test", description: nil, url: nil, urlToImage: nil, publishedAt: nil)),
+            DNCellViewModel(article:News(author: "ojha", title: "test", description: nil, url: nil, urlToImage: nil, publishedAt: nil)),
+            DNCellViewModel(article:News(author: "ojha", title: "Testing saves the world", description: nil, url: nil, urlToImage: nil, publishedAt: nil)),
+            DNCellViewModel(article:News(author: "Bindu", title: "world is enough", description: nil, url: nil, urlToImage: nil, publishedAt: nil))
+        ]
+        
+        
+        let tableModel = DNTableModel()
+        let tableViewModel = DNTableViewModel(model: tableModel)
+        tableViewModel.tableData = articles
+        
+        tableViewModel.removeDuplicates()
+        XCTAssertEqual(tableViewModel.tableData.count, 4)
+        
+    }
+    
 
 }
