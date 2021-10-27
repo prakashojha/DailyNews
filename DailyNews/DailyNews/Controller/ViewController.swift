@@ -54,12 +54,12 @@ class ViewController: UIViewController {
     func setupTableView(){
         tableView = UITableView()
         view.addSubview(tableView)
-        tableView.rowHeight = CGFloat(tableViewModel.cellRowHeight)
-        tableView.register(DNCellView.self, forCellReuseIdentifier: "Cell")
+    
+        tableView.register(DNCellView.self, forCellReuseIdentifier: tableViewModel.cellIndetifier)
         tableView.separatorStyle = .singleLine
         tableView.delegate = self
         tableView.dataSource = self
-        
+        tableView.prefetchDataSource = self
         tableView.refreshControl = UIRefreshControl()
         tableView.refreshControl?.addTarget(self,
                                             action: #selector(didPullToRefresh),
@@ -93,13 +93,29 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: UITableViewDataSource, UITableViewDelegate{
+extension ViewController: UITableViewDataSource, UITableViewDelegate, UITableViewDataSourcePrefetching{
+    
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        for indexPath in indexPaths{
+            if let urlToImage = tableViewModel.tableData[indexPath.row].urlToImage{
+                NetworkManager.shared.fetchImage(imageURL: urlToImage) { (_) in
+            
+                }
+            }
+        }
+    }
+    
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tableViewModel.tableData.count
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return CGFloat(tableViewModel.cellRowHeight)
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? DNCellView
+        let cell = tableView.dequeueReusableCell(withIdentifier: tableViewModel.cellIndetifier, for: indexPath) as? DNCellView
         cell?.cellViewModel = tableViewModel.tableData[indexPath.row]
         return cell ?? UITableViewCell()
         

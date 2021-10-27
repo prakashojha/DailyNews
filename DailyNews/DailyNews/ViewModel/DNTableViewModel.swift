@@ -74,9 +74,9 @@ class DNTableViewModel{
             switch(result){
             case .success(let newsData):
                 let data = newsData.map(DNCellViewModel.init)
+                self.tableData.append(contentsOf: data)
+                removeDuplicates()
                 DispatchQueue.main.async{
-                    self.tableData.append(contentsOf: data)
-                    removeDuplicates()
                     completion(true)
                 }
             case .failure( _):

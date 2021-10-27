@@ -18,10 +18,8 @@ struct DNTableModel{
     var baseUrl = "https://api.newscatcherapi.com/v2/"
     var AULatestHeadLine = "latest_headlines?countries=au&page_size=20"
     
-    
     var urlString: String{
         let urlString = "\(baseUrl)\(AULatestHeadLine)&page=\(page)"
         return urlString
-    }
-    
+    }    
 }
