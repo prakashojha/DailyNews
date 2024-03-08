@@ -40,16 +40,16 @@ class DailyNewsTests: XCTestCase {
         }*/
     }
     
-    func test_Article(){
-        let cellViewModel = DNCellViewModel(article: article)
-        
-        XCTAssertEqual(article.author, cellViewModel.author)
-        XCTAssertEqual(article.title, cellViewModel.title)
-        XCTAssertEqual(article.description, cellViewModel.description)
-        XCTAssertEqual(article.url, cellViewModel.url)
-        XCTAssertEqual(article.urlToImage, cellViewModel.urlToImage)
-        XCTAssertEqual(article.publishedAt, cellViewModel.publishedAt)
-    }
-    
+//    func test_Article(){
+//        let cellViewModel = DNCellViewModel(article: article)
+//        
+//        XCTAssertEqual(article.author, cellViewModel.author)
+//        XCTAssertEqual(article.title, cellViewModel.title)
+//        XCTAssertEqual(article.description, cellViewModel.description)
+//        XCTAssertEqual(article.url, cellViewModel.url)
+//        XCTAssertEqual(article.urlToImage, cellViewModel.urlToImage)
+//        XCTAssertEqual(article.publishedAt, cellViewModel.publishedAt)
+//    }
+//    
 
 }

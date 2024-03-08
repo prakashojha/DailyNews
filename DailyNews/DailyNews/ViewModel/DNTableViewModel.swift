@@ -7,18 +7,23 @@
 
 import Foundation
 
+
 class DNTableViewModel{
     
     var model: DNTableModel!
-    var coordinator: TableViewCoordinator?
+    var coordinator: TableViewCoordinatorDelegate?
     var tableData: [DNCellViewModel] = []
+    let apiService: APIServiceProtocol
     
-    init(model: DNTableModel){
+    let cachedImage = NSCache<NSString, NSData>()
+    
+    init(model: DNTableModel, apiService: APIServiceProtocol){
         self.model = model
+        self.apiService = apiService
     }
     
-    var cellIndetifier: String{
-        return model.cellIndetifier
+    var cellIdentifier: String{
+        return model.cellIdentifier
     }
     
     var page: Int{
@@ -69,13 +74,73 @@ class DNTableViewModel{
         self.tableData = result
     }
     
+    func deleteCachedImages(){
+        self.cachedImage.removeAllObjects()
+    }
+    
+    func getImageFromCache(_ forKey: String)->Data? {
+        return cachedImage.object(forKey: NSString(string: forKey)) as? Data
+    }
+    
+    func storeImageAtCache(_ forKey: String, _ data: Data) {
+        self.cachedImage.setObject(data as NSData, forKey: NSString(string: forKey))
+    }
+    
+    func getImageUrl(_ atRow: Int) -> String? {
+        var urlImage: String?
+        if atRow >= 0 && atRow < self.tableData.count {
+            urlImage = self.tableData[atRow].urlToImage
+            
+        }
+        return urlImage
+    }
+    
+    func prefetchImages(_ forRow: Int) {
+        getImage(at: forRow)
+    }
+    
+    
+    /// Get image data for a given row. API request is made when imageData is not found in cache
+    /// - Parameters:
+    ///   - row: cell row index
+    ///   - completion: pass imageData to caller
+    func getImage(at row: Int, _ completion: ( (Data?)->Void)? = nil ) {
+        guard let urlToImage = getImageUrl(row) else {
+            completion?(nil)
+            return
+        }
+        if let imageData = getImageFromCache(urlToImage) {
+            completion?(imageData)
+        }
+        else{
+            fetchImage(imageURL: urlToImage) { data in
+                if let data = data {
+                    self.storeImageAtCache(urlToImage, data)
+                }
+                completion?(data)
+            }
+        }
+    }
+
+    
+    func fetchImage(imageURL: String, _ completion: ( (Data?)->Void)? = nil ){
+        apiService.fetchImage(urlString: imageURL) { data in
+            if let data = data {
+                completion?(data)
+            }
+            else{
+                completion?(nil)
+            }
+        }
+    }
+    
     func fetchNewsData(completion: @escaping (_ status: Bool)->Void){
-        NetworkManager.shared.fetchNews(page: page, urlString: urlString) { [unowned self](result) in
+        apiService.fetchNews(page: page, urlString: urlString) { [weak self] (result: Result<DNNewsModel, Error>) in
             switch(result){
             case .success(let newsData):
-                let data = newsData.map(DNCellViewModel.init)
-                self.tableData.append(contentsOf: data)
-                removeDuplicates()
+                let data = newsData.articles.map(DNCellViewModel.init)
+                self?.tableData.append(contentsOf: data)
+                self?.removeDuplicates()
                 DispatchQueue.main.async{
                     completion(true)
                 }
@@ -85,13 +150,11 @@ class DNTableViewModel{
         }
     }
     
-    func loadWebPage(url: URL?)->String{
-        if let url = url{
-            coordinator?.loadWebPage(url: url)
-        } else {
-            return "INVALID URL"
+    func loadWebPage(url: URL?){
+        guard let url = url else {
+            coordinator?.showAlert("Url does not exist")
+            return
         }
-        
-        return "OK"
+        coordinator?.loadWebPage(url: url)
     }
 }

@@ -12,5 +12,6 @@ import Foundation
 
 struct DNNetworkModel{
     //static var API_KEY = "bS41P8egr5hoMjY2rxWAHUvXYOW3JML2Q8GIW6FqXu0"
-    static var API_KEY = "X_Va_UTNKGah38LKlt_Gy3T3KdGnvxmy1tsG7Tp0SNw"
+    //static var API_KEY = "X_Va_UTNKGah38LKlt_Gy3T3KdGnvxmy1tsG7Tp0SNw"
+    static var API_KEY = "f476e6ddc16b4e35a1c1d816a8f25b49"
 }

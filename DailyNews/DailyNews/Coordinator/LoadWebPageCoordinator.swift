@@ -23,8 +23,8 @@ final class LoadWebPageCoordinator: Coordinator{
     
     func start() {
         let config = SFSafariViewController.Configuration()
-        let safariViewControler = SFSafariViewController(url: url, configuration: config)
-        safariViewControler.modalPresentationStyle = .fullScreen
-        navigationController.present(safariViewControler, animated: true, completion: nil)
+        let safariViewController = SFSafariViewController(url: url, configuration: config)
+        safariViewController.modalPresentationStyle = .fullScreen
+        navigationController.present(safariViewController, animated: true, completion: nil)
     }
 }

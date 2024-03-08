@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B627BA982B994720008B0614 /* APIServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B627BA972B994720008B0614 /* APIServiceProtocol.swift */; };
+		B63171242B9A601E008FDE8A /* StubAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63171232B9A601E008FDE8A /* StubAPIService.swift */; };
+		B63171272B9A9AB9008FDE8A /* SpyCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63171262B9A9AB9008FDE8A /* SpyCoordinator.swift */; };
 		F4ACBAA1272513300001B6A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4ACBAA0272513300001B6A0 /* AppDelegate.swift */; };
 		F4ACBAA3272513300001B6A0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4ACBAA2272513300001B6A0 /* SceneDelegate.swift */; };
 		F4ACBAA5272513300001B6A0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4ACBAA4272513300001B6A0 /* ViewController.swift */; };
@@ -20,7 +23,7 @@
 		F4ACBB0827255A780001B6A0 /* DNCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4ACBB0727255A780001B6A0 /* DNCellViewModel.swift */; };
 		F4ACBB0D27255CF00001B6A0 /* DNTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4ACBB0C27255CF00001B6A0 /* DNTableViewModel.swift */; };
 		F4ACBB1227255EAA0001B6A0 /* DNTableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4ACBB1127255EAA0001B6A0 /* DNTableModel.swift */; };
-		F4ACBB17272560B00001B6A0 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4ACBB16272560B00001B6A0 /* NetworkManager.swift */; };
+		F4ACBB17272560B00001B6A0 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4ACBB16272560B00001B6A0 /* APIService.swift */; };
 		F4ACBB2027256F0D0001B6A0 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4ACBB1F27256F0D0001B6A0 /* AppCoordinator.swift */; };
 		F4ACBB25272570470001B6A0 /* TableViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4ACBB24272570470001B6A0 /* TableViewCoordinator.swift */; };
 		F4ACBB2D272571E00001B6A0 /* LoadWebPageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4ACBB2C272571E00001B6A0 /* LoadWebPageCoordinator.swift */; };
@@ -46,6 +49,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B627BA972B994720008B0614 /* APIServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceProtocol.swift; sourceTree = "<group>"; };
+		B63171232B9A601E008FDE8A /* StubAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubAPIService.swift; sourceTree = "<group>"; };
+		B63171262B9A9AB9008FDE8A /* SpyCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpyCoordinator.swift; sourceTree = "<group>"; };
 		F4ACBA9D272513300001B6A0 /* DailyNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DailyNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4ACBAA0272513300001B6A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F4ACBAA2272513300001B6A0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -65,7 +71,7 @@
 		F4ACBB0727255A780001B6A0 /* DNCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNCellViewModel.swift; sourceTree = "<group>"; };
 		F4ACBB0C27255CF00001B6A0 /* DNTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNTableViewModel.swift; sourceTree = "<group>"; };
 		F4ACBB1127255EAA0001B6A0 /* DNTableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNTableModel.swift; sourceTree = "<group>"; };
-		F4ACBB16272560B00001B6A0 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		F4ACBB16272560B00001B6A0 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		F4ACBB1F27256F0D0001B6A0 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		F4ACBB24272570470001B6A0 /* TableViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCoordinator.swift; sourceTree = "<group>"; };
 		F4ACBB2C272571E00001B6A0 /* LoadWebPageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadWebPageCoordinator.swift; sourceTree = "<group>"; };
@@ -98,6 +104,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B627BA962B994709008B0614 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				B627BA972B994720008B0614 /* APIServiceProtocol.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		B63171222B9A5FF9008FDE8A /* Stubs */ = {
+			isa = PBXGroup;
+			children = (
+				B63171232B9A601E008FDE8A /* StubAPIService.swift */,
+			);
+			path = Stubs;
+			sourceTree = "<group>";
+		};
+		B63171252B9A9AA6008FDE8A /* Spy */ = {
+			isa = PBXGroup;
+			children = (
+				B63171262B9A9AB9008FDE8A /* SpyCoordinator.swift */,
+			);
+			path = Spy;
+			sourceTree = "<group>";
+		};
 		F4ACBA94272513300001B6A0 = {
 			isa = PBXGroup;
 			children = (
@@ -121,6 +151,7 @@
 		F4ACBA9F272513300001B6A0 /* DailyNews */ = {
 			isa = PBXGroup;
 			children = (
+				B627BA962B994709008B0614 /* Protocol */,
 				F4ACBB1E27256EE40001B6A0 /* Coordinator */,
 				F4ACBB0627255A570001B6A0 /* ViewModel */,
 				F4ACBAFD272543580001B6A0 /* View */,
@@ -139,6 +170,8 @@
 		F4ACBAB62725133C0001B6A0 /* DailyNewsTests */ = {
 			isa = PBXGroup;
 			children = (
+				B63171252B9A9AA6008FDE8A /* Spy */,
+				B63171222B9A5FF9008FDE8A /* Stubs */,
 				F4ACBAB72725133C0001B6A0 /* DailyNewsTests.swift */,
 				F4ACBAB92725133C0001B6A0 /* Info.plist */,
 				F4ACBB342725771F0001B6A0 /* DailyNewsNetworkTest.swift */,
@@ -169,7 +202,7 @@
 		F4ACBAE5272531330001B6A0 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				F4ACBB16272560B00001B6A0 /* NetworkManager.swift */,
+				F4ACBB16272560B00001B6A0 /* APIService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -342,7 +375,7 @@
 				F4ACBB2027256F0D0001B6A0 /* AppCoordinator.swift in Sources */,
 				F4ACBAEF272531880001B6A0 /* DNNetworkModel.swift in Sources */,
 				F4ACBAE1272530EA0001B6A0 /* DNNewsModel.swift in Sources */,
-				F4ACBB17272560B00001B6A0 /* NetworkManager.swift in Sources */,
+				F4ACBB17272560B00001B6A0 /* APIService.swift in Sources */,
 				F4ACBAA5272513300001B6A0 /* ViewController.swift in Sources */,
 				F4ACBAA1272513300001B6A0 /* AppDelegate.swift in Sources */,
 				F4ACBB0827255A780001B6A0 /* DNCellViewModel.swift in Sources */,
@@ -350,6 +383,7 @@
 				F4ACBAA3272513300001B6A0 /* SceneDelegate.swift in Sources */,
 				F4ACBB1227255EAA0001B6A0 /* DNTableModel.swift in Sources */,
 				F4ACBB0D27255CF00001B6A0 /* DNTableViewModel.swift in Sources */,
+				B627BA982B994720008B0614 /* APIServiceProtocol.swift in Sources */,
 				F4ACBB2D272571E00001B6A0 /* LoadWebPageCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -358,7 +392,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B63171242B9A601E008FDE8A /* StubAPIService.swift in Sources */,
 				F4ACBAB82725133C0001B6A0 /* DailyNewsTests.swift in Sources */,
+				B63171272B9A9AB9008FDE8A /* SpyCoordinator.swift in Sources */,
 				F4ACBB352725771F0001B6A0 /* DailyNewsNetworkTest.swift in Sources */,
 				F4ACBB3A272577720001B6A0 /* DailyNewsTableViewModelTest.swift in Sources */,
 			);
@@ -450,7 +486,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -505,7 +541,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -521,7 +557,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6X3D7B6WGB;
+				DEVELOPMENT_TEAM = X5N37JFBKS;
 				INFOPLIST_FILE = DailyNews/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -540,7 +576,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6X3D7B6WGB;
+				DEVELOPMENT_TEAM = X5N37JFBKS;
 				INFOPLIST_FILE = DailyNews/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -559,7 +595,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6X3D7B6WGB;
+				DEVELOPMENT_TEAM = X5N37JFBKS;
 				INFOPLIST_FILE = DailyNewsTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -581,7 +617,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6X3D7B6WGB;
+				DEVELOPMENT_TEAM = X5N37JFBKS;
 				INFOPLIST_FILE = DailyNewsTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -602,7 +638,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6X3D7B6WGB;
+				DEVELOPMENT_TEAM = X5N37JFBKS;
 				INFOPLIST_FILE = DailyNewsUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -622,7 +658,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6X3D7B6WGB;
+				DEVELOPMENT_TEAM = X5N37JFBKS;
 				INFOPLIST_FILE = DailyNewsUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

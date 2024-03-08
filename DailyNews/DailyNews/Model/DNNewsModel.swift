@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct DNNewsModel: Decodable{
+struct DNNewsModel: Codable{
     let articles: [News]
 }
 
-struct News: Decodable{
+struct News: Codable{
     let author: String?
     let title: String?
     let description: String?
@@ -24,10 +24,10 @@ extension News {
     enum CodingKeys: String, CodingKey {
         case author = "author"
         case title = "title"
-        case description = "excerpt"
-        case url = "link"
-        case urlToImage = "media"
-        case publishedAt = "published_date"
+        case description = "description"
+        case url = "url"
+        case urlToImage = "urlToImage"
+        case publishedAt = "publishedAt"
         
     }
 }

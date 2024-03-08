@@ -13,13 +13,18 @@ class ViewController: UIViewController {
     var tableViewModel: DNTableViewModel!
     
     override func viewDidLoad() {
+        self.view.backgroundColor = .white
         super.viewDidLoad()
         setupView()
         fetchData()
     }
 
-    func setupView(){
+    override func viewWillAppear(_ animated: Bool) {
         setupNavigationView()
+    }
+    
+    func setupView(){
+        
         setupTableView()
         setupConstraints()
     }
@@ -27,43 +32,47 @@ class ViewController: UIViewController {
     func fetchData(){
         if let flag = tableView.refreshControl?.isRefreshing , flag == true{
             self.tableViewModel.tableData.removeAll()
-            NetworkManager.shared.cachedImage.removeAllObjects()
+            tableViewModel.deleteCachedImages()
         }
-        tableViewModel.fetchNewsData {[unowned self] (status)in
-            if status{
+        tableViewModel.fetchNewsData {[unowned self] (isFetchSuccess)in
+            if isFetchSuccess {
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                     self.tableViewModel.isPaginating = false
                     self.tableView.tableFooterView = nil
-                    tableView.refreshControl?.endRefreshing()
+                    self.tableView.refreshControl?.endRefreshing()
                 }
             }
         }
     }
     
     func setupNavigationView(){
-        let bounds = self.navigationController!.navigationBar.bounds
-        let lable = UILabel(frame: CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height))
-        lable.text = tableViewModel.headerTitle
-        lable.font = UIFont(name: tableViewModel.headerFontName, size: CGFloat(tableViewModel.headerFontSize))
-        lable.textAlignment = .center
-        self.navigationController?.navigationBar.backgroundColor = .cyan
-        self.navigationItem.titleView = lable
+      
+        let label = UILabel()
+        label.text = tableViewModel.headerTitle
+        label.font = UIFont(name: tableViewModel.headerFontName, size: CGFloat(tableViewModel.headerFontSize))
+        label.textAlignment = .center
+        self.navigationItem.titleView = label
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = UIColor.systemRed
+        navigationItem.standardAppearance = appearance
+        navigationItem.scrollEdgeAppearance = appearance
+        navigationItem.compactAppearance = appearance
     }
     
     func setupTableView(){
         tableView = UITableView()
         view.addSubview(tableView)
     
-        tableView.register(DNCellView.self, forCellReuseIdentifier: tableViewModel.cellIndetifier)
+        tableView.register(DNCellView.self, forCellReuseIdentifier: tableViewModel.cellIdentifier)
         tableView.separatorStyle = .singleLine
         tableView.delegate = self
         tableView.dataSource = self
         tableView.prefetchDataSource = self
         tableView.refreshControl = UIRefreshControl()
-        tableView.refreshControl?.addTarget(self,
-                                            action: #selector(didPullToRefresh),
-                                            for: .valueChanged)
+        tableView.refreshControl?.addTarget(self, action: #selector(didPullToRefresh), for: .valueChanged)
     }
     
     @objc func didPullToRefresh(){
@@ -96,15 +105,10 @@ class ViewController: UIViewController {
 extension ViewController: UITableViewDataSource, UITableViewDelegate, UITableViewDataSourcePrefetching{
     
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        for indexPath in indexPaths{
-            if let urlToImage = tableViewModel.tableData[indexPath.row].urlToImage{
-                NetworkManager.shared.fetchImage(imageURL: urlToImage) { (_) in
-            
-                }
-            }
+        for indexPath in indexPaths {
+            tableViewModel.prefetchImages(indexPath.row)
         }
     }
-    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tableViewModel.tableData.count
@@ -115,10 +119,30 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: tableViewModel.cellIndetifier, for: indexPath) as? DNCellView
-        cell?.cellViewModel = tableViewModel.tableData[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: tableViewModel.cellIdentifier, for: indexPath) as? DNCellView
+        if indexPath.row >= 0 && indexPath.row < tableViewModel.tableData.count {
+            cell?.cellViewModel = tableViewModel.tableData[indexPath.row]
+        }
         return cell ?? UITableViewCell()
         
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        // time to fetch image if not already
+        
+        if let cellView = cell as? DNCellView {
+            cellView.imageLoaded = false
+            tableViewModel.getImage(at: indexPath.row) { data in
+                if let data = data {
+                    cellView.imageData = data
+                }
+                else {
+                    cellView.imageData = UIImage(named: "dummy")?.pngData()
+                }
+                cellView.imageLoaded = true
+                
+            }
+        }
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
@@ -129,16 +153,13 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, UITableVie
                     tableViewModel.page += 1
                     self.tableView.tableFooterView = CreateLoadingFooter()
                     fetchData()
-                    
                 }
             }
-            
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let news = tableViewModel.tableData[indexPath.row]
-        guard let url = URL(string: news.url) else { return }
-        _ = tableViewModel.loadWebPage(url: url)
+         tableViewModel.loadWebPage(url: URL(string: news.url))
     }
 }

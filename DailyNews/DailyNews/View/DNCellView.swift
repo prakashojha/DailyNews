@@ -9,31 +9,46 @@ import UIKit
 
 final class DNCellView: UITableViewCell{
     
+    private lazy var activityIndicatorView: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(style: .large)
+        return activityIndicator
+    }()
+
+    var imageLoaded: Bool = false {
+        didSet {
+            if imageData == nil {
+                DispatchQueue.main.async {
+                    self.cellImage.addSubview(self.activityIndicatorView)
+                    self.activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
+                    NSLayoutConstraint.activate([
+                        self.activityIndicatorView.centerXAnchor.constraint(equalTo: self.cellImage.centerXAnchor, constant: 0.0),
+                        self.activityIndicatorView.centerYAnchor.constraint(equalTo: self.cellImage.centerYAnchor, constant: 0.0)
+                    ])
+                    self.activityIndicatorView.startAnimating()
+                }
+            }
+            else {
+                DispatchQueue.main.async {
+                    self.activityIndicatorView.stopAnimating()
+                    self.activityIndicatorView.removeFromSuperview()
+                }
+            }
+        }
+    }
+    
     var cellViewModel:DNCellViewModel?{
         didSet{
             if let cellData = cellViewModel{
                 cellTitle.text = cellData.title
                 cellDescription.text = cellData.description
-                if let imageURL = cellData.urlToImage{
-                    NetworkManager.shared.fetchImage(imageURL: imageURL) { [unowned self] (data) in
-                        if let data = data, !data.isEmpty{
-                            self.imageData = data
-                        }
-                        else{
-                            self.imageData = UIImage(named: "dummy")?.pngData()
-                        }
-                    }
-                }
-                else{
-                    imageData = UIImage(named: "dummy")?.pngData()
-                }
             }
         }
     }
         
-    var imageData: Data?{
+    var imageData: Data? {
         didSet{
             if let imageData = imageData{
+                self.imageLoaded = true
                 DispatchQueue.main.async {
                     self.cellImage.image = UIImage(data: imageData)
                 }
@@ -72,11 +87,12 @@ final class DNCellView: UITableViewCell{
         selectionStyle = .none
         setupView()
     }
-    
+
     
     func setupView(){
         addSubview(cellTitle)
         addSubview(cellDescription)
+       // addSubview(activityIndicatorView)
         addSubview(cellImage)
         setupConstraints()
     }
@@ -84,6 +100,7 @@ final class DNCellView: UITableViewCell{
     func setupConstraints(){
         setupHeadLineConstraint()
         setupSubHeadLineConstraint()
+       // setUpActivityIndicatorConstraint()
         setupImageConstraint()
     }
     
@@ -108,6 +125,18 @@ final class DNCellView: UITableViewCell{
             ]
         )
     }
+    
+//    func setUpActivityIndicatorConstraint() {
+//        activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate([
+//            activityIndicatorView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
+//            activityIndicatorView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
+//            activityIndicatorView.topAnchor.constraint(equalTo: cellDescription.bottomAnchor, constant: 5),
+//            activityIndicatorView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15),
+//            activityIndicatorView.heightAnchor.constraint(equalToConstant: 200)
+//            ]
+//        )
+//    }
     
     func setupImageConstraint(){
         cellImage.translatesAutoresizingMaskIntoConstraints = false
