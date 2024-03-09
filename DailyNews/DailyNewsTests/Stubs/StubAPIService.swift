@@ -13,28 +13,21 @@ enum StubAPIServiceError: Error {
 }
 
 class StubAPIService: APIServiceProtocol {
-   
-    func CreateURLRequest(urlString: String) -> URLRequest? {
+    
+    func CreateURLRequest(pageLimit: Int) -> URLRequest? {
         return nil
     }
     
-    func fetchNews<T>(page: Int, urlString: String, completion: @escaping (Result<T, Error>) -> Void) where T : Decodable, T : Encodable {
+    func fetchNews<T>(pageLimit: Int, completion: @escaping (Result<T, Error>) -> Void) where T : Decodable, T : Encodable {
         let news = News(author: "", title: "", description: "", url: "", urlToImage: "", publishedAt: "")
         let model = DNNewsModel(articles: [news])
         
-        if let _ = URL(string: urlString) {
-            
-            if page <= 0 {
-                completion(.failure(StubAPIServiceError.FailError))
-            }
-            else {
-                completion(.success(model as! T))
-            }
-        }
-        else{
+        if pageLimit <= 0 {
             completion(.failure(StubAPIServiceError.FailError))
         }
-        
+        else {
+            completion(.success(model as! T))
+        }
     }
     
     func fetchImage(urlString: String, completion: @escaping (Data?) -> Void) {

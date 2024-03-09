@@ -9,7 +9,6 @@ import XCTest
 @testable import DailyNews
 
 
-
 class DailyNewsTableViewModelTest: XCTestCase {
     var stubApiService: StubAPIService!
     var tableModel: DNTableModel!

@@ -10,6 +10,11 @@
 		B627BA982B994720008B0614 /* APIServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B627BA972B994720008B0614 /* APIServiceProtocol.swift */; };
 		B63171242B9A601E008FDE8A /* StubAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63171232B9A601E008FDE8A /* StubAPIService.swift */; };
 		B63171272B9A9AB9008FDE8A /* SpyCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63171262B9A9AB9008FDE8A /* SpyCoordinator.swift */; };
+		B631712A2B9AB897008FDE8A /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63171292B9AB897008FDE8A /* MockURLProtocol.swift */; };
+		B631712F2B9BB5E6008FDE8A /* URLRequestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B631712E2B9BB5E6008FDE8A /* URLRequestProtocol.swift */; };
+		B63171312B9BC752008FDE8A /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63171302B9BC752008FDE8A /* Environment.swift */; };
+		B63171332B9BC9AB008FDE8A /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63171322B9BC9AB008FDE8A /* ApiClient.swift */; };
+		B63171372B9BF913008FDE8A /* ResponseModel.json in Resources */ = {isa = PBXBuildFile; fileRef = B63171362B9BF913008FDE8A /* ResponseModel.json */; };
 		F4ACBAA1272513300001B6A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4ACBAA0272513300001B6A0 /* AppDelegate.swift */; };
 		F4ACBAA3272513300001B6A0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4ACBAA2272513300001B6A0 /* SceneDelegate.swift */; };
 		F4ACBAA5272513300001B6A0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4ACBAA4272513300001B6A0 /* ViewController.swift */; };
@@ -52,6 +57,11 @@
 		B627BA972B994720008B0614 /* APIServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceProtocol.swift; sourceTree = "<group>"; };
 		B63171232B9A601E008FDE8A /* StubAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubAPIService.swift; sourceTree = "<group>"; };
 		B63171262B9A9AB9008FDE8A /* SpyCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpyCoordinator.swift; sourceTree = "<group>"; };
+		B63171292B9AB897008FDE8A /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
+		B631712E2B9BB5E6008FDE8A /* URLRequestProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestProtocol.swift; sourceTree = "<group>"; };
+		B63171302B9BC752008FDE8A /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		B63171322B9BC9AB008FDE8A /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
+		B63171362B9BF913008FDE8A /* ResponseModel.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ResponseModel.json; sourceTree = "<group>"; };
 		F4ACBA9D272513300001B6A0 /* DailyNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DailyNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4ACBAA0272513300001B6A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F4ACBAA2272513300001B6A0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -104,14 +114,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		B627BA962B994709008B0614 /* Protocol */ = {
-			isa = PBXGroup;
-			children = (
-				B627BA972B994720008B0614 /* APIServiceProtocol.swift */,
-			);
-			path = Protocol;
-			sourceTree = "<group>";
-		};
 		B63171222B9A5FF9008FDE8A /* Stubs */ = {
 			isa = PBXGroup;
 			children = (
@@ -126,6 +128,60 @@
 				B63171262B9A9AB9008FDE8A /* SpyCoordinator.swift */,
 			);
 			path = Spy;
+			sourceTree = "<group>";
+		};
+		B63171282B9AB882008FDE8A /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				B63171292B9AB897008FDE8A /* MockURLProtocol.swift */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
+		B631712B2B9BB05F008FDE8A /* App */ = {
+			isa = PBXGroup;
+			children = (
+				B63171342B9BCD27008FDE8A /* Delegate */,
+				B631712D2B9BB1EA008FDE8A /* Environment */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		B631712C2B9BB086008FDE8A /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				F4ACBB1E27256EE40001B6A0 /* Coordinator */,
+				F4ACBADC27252F1B0001B6A0 /* Model */,
+				F4ACBB0627255A570001B6A0 /* ViewModel */,
+				F4ACBAFD272543580001B6A0 /* View */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		B631712D2B9BB1EA008FDE8A /* Environment */ = {
+			isa = PBXGroup;
+			children = (
+				B63171302B9BC752008FDE8A /* Environment.swift */,
+				B63171322B9BC9AB008FDE8A /* ApiClient.swift */,
+			);
+			path = Environment;
+			sourceTree = "<group>";
+		};
+		B63171342B9BCD27008FDE8A /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				F4ACBAA0272513300001B6A0 /* AppDelegate.swift */,
+				F4ACBAA2272513300001B6A0 /* SceneDelegate.swift */,
+			);
+			path = Delegate;
+			sourceTree = "<group>";
+		};
+		B63171352B9BF8B1008FDE8A /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				B63171362B9BF913008FDE8A /* ResponseModel.json */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 		F4ACBA94272513300001B6A0 = {
@@ -151,15 +207,9 @@
 		F4ACBA9F272513300001B6A0 /* DailyNews */ = {
 			isa = PBXGroup;
 			children = (
-				B627BA962B994709008B0614 /* Protocol */,
-				F4ACBB1E27256EE40001B6A0 /* Coordinator */,
-				F4ACBB0627255A570001B6A0 /* ViewModel */,
-				F4ACBAFD272543580001B6A0 /* View */,
-				F4ACBAF6272537360001B6A0 /* Controller */,
+				B631712B2B9BB05F008FDE8A /* App */,
+				B631712C2B9BB086008FDE8A /* Presentation */,
 				F4ACBAE5272531330001B6A0 /* Service */,
-				F4ACBADC27252F1B0001B6A0 /* Model */,
-				F4ACBAA0272513300001B6A0 /* AppDelegate.swift */,
-				F4ACBAA2272513300001B6A0 /* SceneDelegate.swift */,
 				F4ACBAA92725133C0001B6A0 /* Assets.xcassets */,
 				F4ACBAAB2725133C0001B6A0 /* LaunchScreen.storyboard */,
 				F4ACBAAE2725133C0001B6A0 /* Info.plist */,
@@ -170,6 +220,8 @@
 		F4ACBAB62725133C0001B6A0 /* DailyNewsTests */ = {
 			isa = PBXGroup;
 			children = (
+				B63171352B9BF8B1008FDE8A /* Data */,
+				B63171282B9AB882008FDE8A /* Mock */,
 				B63171252B9A9AA6008FDE8A /* Spy */,
 				B63171222B9A5FF9008FDE8A /* Stubs */,
 				F4ACBAB72725133C0001B6A0 /* DailyNewsTests.swift */,
@@ -202,22 +254,17 @@
 		F4ACBAE5272531330001B6A0 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				B627BA972B994720008B0614 /* APIServiceProtocol.swift */,
 				F4ACBB16272560B00001B6A0 /* APIService.swift */,
+				B631712E2B9BB5E6008FDE8A /* URLRequestProtocol.swift */,
 			);
 			path = Service;
-			sourceTree = "<group>";
-		};
-		F4ACBAF6272537360001B6A0 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				F4ACBAA4272513300001B6A0 /* ViewController.swift */,
-			);
-			path = Controller;
 			sourceTree = "<group>";
 		};
 		F4ACBAFD272543580001B6A0 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F4ACBAA4272513300001B6A0 /* ViewController.swift */,
 				F4ACBAFE2725437F0001B6A0 /* DNCellView.swift */,
 			);
 			path = View;
@@ -354,6 +401,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B63171372B9BF913008FDE8A /* ResponseModel.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -372,13 +420,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4ACBB25272570470001B6A0 /* TableViewCoordinator.swift in Sources */,
+				B63171312B9BC752008FDE8A /* Environment.swift in Sources */,
 				F4ACBB2027256F0D0001B6A0 /* AppCoordinator.swift in Sources */,
 				F4ACBAEF272531880001B6A0 /* DNNetworkModel.swift in Sources */,
+				B63171332B9BC9AB008FDE8A /* ApiClient.swift in Sources */,
 				F4ACBAE1272530EA0001B6A0 /* DNNewsModel.swift in Sources */,
 				F4ACBB17272560B00001B6A0 /* APIService.swift in Sources */,
 				F4ACBAA5272513300001B6A0 /* ViewController.swift in Sources */,
 				F4ACBAA1272513300001B6A0 /* AppDelegate.swift in Sources */,
 				F4ACBB0827255A780001B6A0 /* DNCellViewModel.swift in Sources */,
+				B631712F2B9BB5E6008FDE8A /* URLRequestProtocol.swift in Sources */,
 				F4ACBAFF2725437F0001B6A0 /* DNCellView.swift in Sources */,
 				F4ACBAA3272513300001B6A0 /* SceneDelegate.swift in Sources */,
 				F4ACBB1227255EAA0001B6A0 /* DNTableModel.swift in Sources */,
@@ -392,6 +443,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B631712A2B9AB897008FDE8A /* MockURLProtocol.swift in Sources */,
 				B63171242B9A601E008FDE8A /* StubAPIService.swift in Sources */,
 				F4ACBAB82725133C0001B6A0 /* DailyNewsTests.swift in Sources */,
 				B63171272B9A9AB9008FDE8A /* SpyCoordinator.swift in Sources */,

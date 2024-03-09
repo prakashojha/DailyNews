@@ -9,8 +9,17 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    var tableView: UITableView!
-    var tableViewModel: DNTableViewModel!
+    private var tableView: UITableView!
+    private var tableViewModel: DNTableViewModel
+    
+    init(tableViewModel: DNTableViewModel!) {
+        self.tableViewModel = tableViewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         self.view.backgroundColor = .white

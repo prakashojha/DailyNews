@@ -12,7 +12,6 @@ protocol TableViewCoordinatorDelegate {
     func showAlert(_ withReason: String)
 }
     
-
 final class TableViewCoordinator: Coordinator{
     private (set) var childCoordinators: [Coordinator] = []
     let navigationController: UINavigationController
@@ -21,13 +20,14 @@ final class TableViewCoordinator: Coordinator{
         self.navigationController = navigationController
     }
     
+    
     func start() {
-        let apiService: APIServiceProtocol = APIService()
-        let viewController = ViewController()
-        let tableModel = DNTableModel()
-        let dnTableViewViewModel = DNTableViewModel(model: tableModel, apiService: apiService)
-        viewController.tableViewModel = dnTableViewViewModel
+        let apiClient: URLRequestProtocol = Environment.shared.apiClient
+        let apiService: APIServiceProtocol = APIService(urlRequest: apiClient)
+        let tableModel: DNTableModel = DNTableModel()
+        let dnTableViewViewModel: DNTableViewModel = DNTableViewModel(model: tableModel, apiService: apiService)
         dnTableViewViewModel.coordinator = self
+        let viewController = ViewController(tableViewModel: dnTableViewViewModel)
         navigationController.setViewControllers([viewController], animated: false)
     }
 }

@@ -18,12 +18,11 @@ struct DNTableModel{
     //var baseUrl = "https://api.newscatcherapi.com/v2/"
     //var AULatestHeadLine = "latest_headlines?countries=au&page_size=20"
     
-    var baseUrl = "https://newsapi.org/v2/"
-    var AULatestHeadLine = "top-headlines?language=en&pageSize=10"
+   // var baseUrl = "https://newsapi.org/v2/top-headlines?language=en&pageSize=10&page=1"
     
-    var urlString: String{
-        let urlString = "\(baseUrl)\(AULatestHeadLine)&page=\(page)"
-        return urlString
-    }    
+//    var urlString: String{
+//        let urlString = "\(baseUrl)\(AULatestHeadLine)&page=\(page)"
+//        return urlString
+//    }    
 }
 

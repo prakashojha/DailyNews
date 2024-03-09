@@ -47,10 +47,6 @@ class DNTableViewModel{
         return model.headerFontSize
     }
     
-    var urlString: String{
-        return model.urlString
-    }
-    
     var cellRowHeight: Int{
         return model.cellRowHeight
     }
@@ -121,7 +117,6 @@ class DNTableViewModel{
             }
         }
     }
-
     
     func fetchImage(imageURL: String, _ completion: ( (Data?)->Void)? = nil ){
         apiService.fetchImage(urlString: imageURL) { data in
@@ -135,7 +130,7 @@ class DNTableViewModel{
     }
     
     func fetchNewsData(completion: @escaping (_ status: Bool)->Void){
-        apiService.fetchNews(page: page, urlString: urlString) { [weak self] (result: Result<DNNewsModel, Error>) in
+        apiService.fetchNews(pageLimit: page) { [weak self] (result: Result<DNNewsModel, Error>) in
             switch(result){
             case .success(let newsData):
                 let data = newsData.articles.map(DNCellViewModel.init)
