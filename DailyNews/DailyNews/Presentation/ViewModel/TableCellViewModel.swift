@@ -7,35 +7,34 @@
 
 import Foundation
 
-struct DNCellViewModel{
+struct TableCellViewModel{
     
-    let article: News
+    let article: Article
     
-    init(article: News) {
+    init(article: Article) {
         self.article = article
     }
     
-    var title: String {
-        return article.title ?? "Unknown"
+    var title: String? {
+        return article.title
     }
     
-    var description: String {
-        return article.description ?? "No Content Found"
+    var description: String? {
+        return article.description
     }
     
-    var url: String {
-        return article.url ?? "URL Not Found"
+    var urlString: String? {
+        return article.url
     }
 
     var urlToImage: String? {
-        var https: String?
+        var httpsUrlString: String?
         if let urlString = article.urlToImage {
             guard let http = URL(string: urlString) else { return nil }
             var comps = URLComponents(url: http, resolvingAgainstBaseURL: false)!
             comps.scheme = "https"
-            https = "\(comps.url!)"
+            httpsUrlString = "\(comps.url!)"
         }
-        return https ?? nil
+        return httpsUrlString
     }
-
 }

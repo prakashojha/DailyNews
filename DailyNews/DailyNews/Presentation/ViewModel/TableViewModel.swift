@@ -8,16 +8,16 @@
 import Foundation
 
 
-class DNTableViewModel{
+class TableViewModel{
     
-    var model: DNTableModel!
+    var model: TableModel!
     var coordinator: TableViewCoordinatorDelegate?
-    var tableData: [DNCellViewModel] = []
+    var tableData: [TableCellViewModel] = []
     let apiService: APIServiceProtocol
     
     let cachedImage = NSCache<NSString, NSData>()
     
-    init(model: DNTableModel, apiService: APIServiceProtocol){
+    init(model: TableModel, apiService: APIServiceProtocol){
         self.model = model
         self.apiService = apiService
     }
@@ -61,9 +61,9 @@ class DNTableViewModel{
     }
     
     func removeDuplicates() {
-        var result = [DNCellViewModel]()
+        var result = [TableCellViewModel]()
         for value in self.tableData {
-            if !(result.contains(where: {$0.title.lowercased() == value.title.lowercased()})){
+            if !(result.contains(where: {$0.title?.lowercased() == value.title?.lowercased()})){
                 result.append(value)
             }
         }
@@ -130,10 +130,10 @@ class DNTableViewModel{
     }
     
     func fetchNewsData(completion: @escaping (_ status: Bool)->Void){
-        apiService.fetchNews(pageLimit: page) { [weak self] (result: Result<DNNewsModel, Error>) in
+        apiService.fetchNews(pageLimit: page) { [weak self] (result: Result<NewsModel, Error>) in
             switch(result){
             case .success(let newsData):
-                let data = newsData.articles.map(DNCellViewModel.init)
+                let data = newsData.articles.map(TableCellViewModel.init)
                 self?.tableData.append(contentsOf: data)
                 self?.removeDuplicates()
                 DispatchQueue.main.async{
@@ -145,8 +145,8 @@ class DNTableViewModel{
         }
     }
     
-    func loadWebPage(url: URL?){
-        guard let url = url else {
+    func loadWebPage(urlString: String?){
+        guard let urlString = urlString, let url = URL(string: urlString) else {
             coordinator?.showAlert("Url does not exist")
             return
         }

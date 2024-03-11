@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class DNCellView: UITableViewCell{
+final class TableCellView: UITableViewCell{
     
     private lazy var activityIndicatorView: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView(style: .large)
@@ -36,11 +36,13 @@ final class DNCellView: UITableViewCell{
         }
     }
     
-    var cellViewModel:DNCellViewModel?{
+    var cellViewModel:TableCellViewModel?{
         didSet{
             if let cellData = cellViewModel{
-                cellTitle.text = cellData.title
-                cellDescription.text = cellData.description
+                DispatchQueue.main.async {
+                    self.cellTitle.text = cellData.title
+                    self.cellDescription.text = cellData.description
+                }
             }
         }
     }

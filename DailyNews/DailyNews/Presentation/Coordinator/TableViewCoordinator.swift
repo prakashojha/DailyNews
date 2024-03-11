@@ -13,6 +13,8 @@ protocol TableViewCoordinatorDelegate {
 }
     
 final class TableViewCoordinator: Coordinator{
+   
+    var parentCoordinator: Coordinator?
     private (set) var childCoordinators: [Coordinator] = []
     let navigationController: UINavigationController
     
@@ -20,29 +22,45 @@ final class TableViewCoordinator: Coordinator{
         self.navigationController = navigationController
     }
     
-    
     func start() {
         let apiClient: URLRequestProtocol = Environment.shared.apiClient
         let apiService: APIServiceProtocol = APIService(urlRequest: apiClient)
-        let tableModel: DNTableModel = DNTableModel()
-        let dnTableViewViewModel: DNTableViewModel = DNTableViewModel(model: tableModel, apiService: apiService)
+        let tableModel: TableModel = TableModel()
+        let dnTableViewViewModel: TableViewModel = TableViewModel(model: tableModel, apiService: apiService)
         dnTableViewViewModel.coordinator = self
+
         let viewController = ViewController(tableViewModel: dnTableViewViewModel)
         navigationController.setViewControllers([viewController], animated: false)
+    }
+    
+    func add(coordinator: Coordinator) {
+        self.childCoordinators.append(coordinator)
+    }
+    
+    func remove(coordinator: Coordinator) {
+        for(index, childCoordinator) in self.childCoordinators.enumerated() {
+            if childCoordinator === coordinator {
+                self.childCoordinators.remove(at: index)
+                break
+            }
+        }
     }
 }
 
 extension TableViewCoordinator: TableViewCoordinatorDelegate {
     
     func loadWebPage(url: URL){
-        let loadWebPageCoordinator = LoadWebPageCoordinator(navigationController: navigationController, url: url)
+        let loadWebPageCoordinator: LoadWebPageCoordinator = LoadWebPageCoordinator(navigationController: navigationController, url: url)
+        loadWebPageCoordinator.parentCoordinator = self
         childCoordinators.append(loadWebPageCoordinator)
+        print(childCoordinators.count)
         loadWebPageCoordinator.start()
     }
     
     func showAlert(_ withReason: String){
-        let alertController = UIAlertController(title: "DN News", message: withReason , preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Daily News", message: withReason , preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .cancel))
         navigationController.viewControllers.first?.present(alertController, animated: true)
     }
+    
 }

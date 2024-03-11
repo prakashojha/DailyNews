@@ -5,13 +5,13 @@
 //  Created by Saumya Prakash on 8/03/24.
 //
 
-import Foundation
-import UIKit
+import XCTest
+@testable import DailyNews
 
 class MockURLProtocol: URLProtocol{
     
     static var data: Data?
-    static var failedError: Error?
+    static var failedError: NetworkError?
     static var response: URLResponse?
     
     

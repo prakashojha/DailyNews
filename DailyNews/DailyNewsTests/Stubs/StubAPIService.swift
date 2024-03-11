@@ -19,8 +19,8 @@ class StubAPIService: APIServiceProtocol {
     }
     
     func fetchNews<T>(pageLimit: Int, completion: @escaping (Result<T, Error>) -> Void) where T : Decodable, T : Encodable {
-        let news = News(author: "", title: "", description: "", url: "", urlToImage: "", publishedAt: "")
-        let model = DNNewsModel(articles: [news])
+        let news = Article(author: "", title: "", description: "", url: "", urlToImage: "", publishedAt: "")
+        let model = NewsModel(articles: [news])
         
         if pageLimit <= 0 {
             completion(.failure(StubAPIServiceError.FailError))

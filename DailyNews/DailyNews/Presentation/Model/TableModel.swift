@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct DNTableModel{
+struct TableModel{
     var cellIdentifier: String! = "NewsCell"
     var page = 1
     var cellRowHeight = 300

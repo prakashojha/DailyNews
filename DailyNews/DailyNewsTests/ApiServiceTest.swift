@@ -15,7 +15,7 @@ struct StubUrlRequestProtocol: URLRequestProtocol {
     
 }
 
-class DailyNewsNetworkTest: XCTestCase {
+class ApiServiceTest: XCTestCase {
     
     var config: URLSessionConfiguration!
         var urlSession: URLSession!
@@ -83,7 +83,9 @@ class DailyNewsNetworkTest: XCTestCase {
         sut = APIService(urlRequest: urlRequestProtocol, urlSession: urlSession)
         self.expectation = expectation(description: "RemoteNetworkServiceTestExpectation")
         
-        let failedError: Error? = NetworkError.UnKnown
+        MockURLProtocol.data = nil
+        MockURLProtocol.response = nil
+        let failedError: NetworkError? = NetworkError.UnKnown
         MockURLProtocol.failedError = failedError
         
         sut.fetchImage(urlString: "www.google.com") { data in
@@ -101,7 +103,9 @@ class DailyNewsNetworkTest: XCTestCase {
         sut = APIService(urlRequest: urlRequestProtocol, urlSession: urlSession)
         self.expectation = expectation(description: "RemoteNetworkServiceTestExpectation")
         
-        let failedError: Error? = NetworkError.DataNotFound
+        MockURLProtocol.data = nil
+        MockURLProtocol.response = nil
+        let failedError: NetworkError? = NetworkError.DataNotFound
         MockURLProtocol.failedError = failedError
         sut.fetchImage(urlString: "www.google.com") { data in
             expectedData = data
@@ -122,6 +126,8 @@ class DailyNewsNetworkTest: XCTestCase {
         sut = APIService(urlRequest: urlRequestProtocol, urlSession: urlSession)
         self.expectation = expectation(description: "RemoteNetworkServiceTestExpectation")
         
+        MockURLProtocol.data = nil
+        MockURLProtocol.failedError = nil
         let response = HTTPURLResponse(url: URL(string: "www.google.com")!, statusCode: 200, httpVersion: nil, headerFields: nil)
         MockURLProtocol.response = response
         
@@ -129,7 +135,7 @@ class DailyNewsNetworkTest: XCTestCase {
             switch(result){
             
             case .failure(let error):
-                XCTAssertEqual(error as! NetworkError, NetworkError.DecodeError)
+                XCTAssertEqual((error as! NetworkError).localizedDescription , NetworkError.DecodeError.localizedDescription)
                 self.expectation.fulfill()
             default:break
             }
@@ -144,19 +150,21 @@ class DailyNewsNetworkTest: XCTestCase {
             var quantity: Int
             var price: Double
         }
-       
+
         let urlRequestProtocol = StubUrlRequestProtocol()
         sut = APIService(urlRequest: urlRequestProtocol, urlSession: urlSession)
         self.expectation = expectation(description: "RemoteNetworkServiceTestExpectation")
-        
+
         let response = HTTPURLResponse(url: URL(string: "www.google.com")!, statusCode: 200, httpVersion: nil, headerFields: nil)
         let data = getJSONData(from: "ResponseModel")
+        
+        MockURLProtocol.failedError = nil
         MockURLProtocol.response = response
         MockURLProtocol.data = data
-        
+
         sut.fetchNews(pageLimit: 1) { (result: Result<Model, Error>) in
             switch(result){
-            
+
             case .success(let data):
                 XCTAssertEqual(data.quantity, 5)
                 self.expectation.fulfill()
@@ -167,20 +175,23 @@ class DailyNewsNetworkTest: XCTestCase {
     }
     
     func test_fetchNews_whenReceivedWrongURLResponse_ReturnError() {
-       
-       
+
+
         let urlRequestProtocol = StubUrlRequestProtocol()
         sut = APIService(urlRequest: urlRequestProtocol, urlSession: urlSession)
         self.expectation = expectation(description: "RemoteNetworkServiceTestExpectation")
-        
+
         let mockUrl = URL(string: urlString)!
         let response: URLResponse? =  URLResponse(url: mockUrl, mimeType: "application/json", expectedContentLength: -1, textEncodingName: nil)
-        MockURLProtocol.response = response
-       
         
-        sut.fetchNews(pageLimit: 1) { (result: Result<DNNewsModel, Error>) in
+        MockURLProtocol.data = nil
+        MockURLProtocol.failedError = nil
+        MockURLProtocol.response = response
+
+
+        sut.fetchNews(pageLimit: 1) { (result: Result<NewsModel, Error>) in
             switch(result){
-            
+
             case .failure(let error):
                 XCTAssertEqual(error as! NetworkError, NetworkError.NoResponse)
                 self.expectation.fulfill()

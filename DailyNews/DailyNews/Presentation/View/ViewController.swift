@@ -10,9 +10,9 @@ import UIKit
 class ViewController: UIViewController {
 
     private var tableView: UITableView!
-    private var tableViewModel: DNTableViewModel
+    private var tableViewModel: TableViewModel
     
-    init(tableViewModel: DNTableViewModel!) {
+    init(tableViewModel: TableViewModel!) {
         self.tableViewModel = tableViewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -75,7 +75,7 @@ class ViewController: UIViewController {
         tableView = UITableView()
         view.addSubview(tableView)
     
-        tableView.register(DNCellView.self, forCellReuseIdentifier: tableViewModel.cellIdentifier)
+        tableView.register(TableCellView.self, forCellReuseIdentifier: tableViewModel.cellIdentifier)
         tableView.separatorStyle = .singleLine
         tableView.delegate = self
         tableView.dataSource = self
@@ -128,7 +128,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: tableViewModel.cellIdentifier, for: indexPath) as? DNCellView
+        let cell = tableView.dequeueReusableCell(withIdentifier: tableViewModel.cellIdentifier, for: indexPath) as? TableCellView
         if indexPath.row >= 0 && indexPath.row < tableViewModel.tableData.count {
             cell?.cellViewModel = tableViewModel.tableData[indexPath.row]
         }
@@ -139,7 +139,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         // time to fetch image if not already
         
-        if let cellView = cell as? DNCellView {
+        if let cellView = cell as? TableCellView {
             cellView.imageLoaded = false
             tableViewModel.getImage(at: indexPath.row) { data in
                 if let data = data {
@@ -168,7 +168,9 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let news = tableViewModel.tableData[indexPath.row]
-         tableViewModel.loadWebPage(url: URL(string: news.url))
+        let urlString = tableViewModel.tableData[indexPath.row].urlString
+        tableViewModel.loadWebPage(urlString: urlString)
+        
     }
+    
 }

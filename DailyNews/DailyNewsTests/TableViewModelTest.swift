@@ -9,16 +9,16 @@ import XCTest
 @testable import DailyNews
 
 
-class DailyNewsTableViewModelTest: XCTestCase {
+class TableViewModelTest: XCTestCase {
     var stubApiService: StubAPIService!
-    var tableModel: DNTableModel!
-    var tableViewModel: DNTableViewModel!
+    var tableModel: TableModel!
+    var tableViewModel: TableViewModel!
     var exp: XCTestExpectation!
     
     override func setUpWithError() throws {
         stubApiService = StubAPIService()
-        tableModel = DNTableModel()
-        tableViewModel = DNTableViewModel(model: tableModel, apiService: stubApiService)
+        tableModel = TableModel()
+        tableViewModel = TableViewModel(model: tableModel, apiService: stubApiService)
     }
     
     override func tearDownWithError() throws {
@@ -89,9 +89,9 @@ class DailyNewsTableViewModelTest: XCTestCase {
         let urlImage = "https://www.google.com"
         exp = expectation(description: "DailyNewsTableViewModelTest")
         tableViewModel.tableData = [
-            DNCellViewModel(article: News(author: "", title: "", description: "", url: "", urlToImage: urlImage, publishedAt: "")),
-            DNCellViewModel(article: News(author: "", title: "", description: "", url: "", urlToImage: "", publishedAt: "")),
-            DNCellViewModel(article: News(author: "", title: "", description: "", url: "", urlToImage: "", publishedAt: ""))
+            TableCellViewModel(article: Article(author: "", title: "", description: "", url: "", urlToImage: urlImage, publishedAt: "")),
+            TableCellViewModel(article: Article(author: "", title: "", description: "", url: "", urlToImage: "", publishedAt: "")),
+            TableCellViewModel(article: Article(author: "", title: "", description: "", url: "", urlToImage: "", publishedAt: ""))
         ]
 
         tableViewModel.getImage(at: 0) { data in
@@ -108,9 +108,9 @@ class DailyNewsTableViewModelTest: XCTestCase {
         let urlImage = "https://www.google.com"
         exp = expectation(description: "DailyNewsTableViewModelTest")
         tableViewModel.tableData = [
-            DNCellViewModel(article: News(author: "", title: "", description: "", url: "", urlToImage: urlImage, publishedAt: "")),
-            DNCellViewModel(article: News(author: "", title: "", description: "", url: "", urlToImage: "", publishedAt: "")),
-            DNCellViewModel(article: News(author: "", title: "", description: "", url: "", urlToImage: "", publishedAt: ""))
+            TableCellViewModel(article: Article(author: "", title: "", description: "", url: "", urlToImage: urlImage, publishedAt: "")),
+            TableCellViewModel(article: Article(author: "", title: "", description: "", url: "", urlToImage: "", publishedAt: "")),
+            TableCellViewModel(article: Article(author: "", title: "", description: "", url: "", urlToImage: "", publishedAt: ""))
         ]
 
         tableViewModel.getImage(at: -1) { data in
@@ -126,9 +126,9 @@ class DailyNewsTableViewModelTest: XCTestCase {
         var receivedUrl: String? = nil
         let urlImage: String? = "https://www.google.com"
         tableViewModel.tableData = [
-            DNCellViewModel(article: News(author: "", title: "", description: "", url: "", urlToImage: urlImage, publishedAt: "")),
-            DNCellViewModel(article: News(author: "", title: "", description: "", url: "", urlToImage: "", publishedAt: "")),
-            DNCellViewModel(article: News(author: "", title: "", description: "", url: "", urlToImage: "", publishedAt: ""))
+            TableCellViewModel(article: Article(author: "", title: "", description: "", url: "", urlToImage: urlImage, publishedAt: "")),
+            TableCellViewModel(article: Article(author: "", title: "", description: "", url: "", urlToImage: "", publishedAt: "")),
+            TableCellViewModel(article: Article(author: "", title: "", description: "", url: "", urlToImage: "", publishedAt: ""))
         ]
         receivedUrl = tableViewModel.getImageUrl(0)
         XCTAssertEqual(receivedUrl, urlImage)
@@ -138,9 +138,9 @@ class DailyNewsTableViewModelTest: XCTestCase {
         var receivedUrl: String? = "https://www.google.com"
         let urlImage: String? = "https://www.google.com"
         tableViewModel.tableData = [
-            DNCellViewModel(article: News(author: "", title: "", description: "", url: "", urlToImage: urlImage, publishedAt: "")),
-            DNCellViewModel(article: News(author: "", title: "", description: "", url: "", urlToImage: "", publishedAt: "")),
-            DNCellViewModel(article: News(author: "", title: "", description: "", url: "", urlToImage: "", publishedAt: ""))
+            TableCellViewModel(article: Article(author: "", title: "", description: "", url: "", urlToImage: urlImage, publishedAt: "")),
+            TableCellViewModel(article: Article(author: "", title: "", description: "", url: "", urlToImage: "", publishedAt: "")),
+            TableCellViewModel(article: Article(author: "", title: "", description: "", url: "", urlToImage: "", publishedAt: ""))
         ]
         receivedUrl = tableViewModel.getImageUrl(-1)
         XCTAssertNil(receivedUrl)
@@ -167,12 +167,12 @@ class DailyNewsTableViewModelTest: XCTestCase {
     
     func test_WhenDuplicateTitleFound_DuplicateTitleRemoveSuccess(){
         let articles = [
-            DNCellViewModel(article:News(author: "bindu", title: "Testing", description: "", url: nil, urlToImage: nil, publishedAt: nil)),
-            DNCellViewModel(article:News(author: "bindu", title: "World", description: nil, url: nil, urlToImage: nil, publishedAt: nil)),
-            DNCellViewModel(article:News(author: "prakash", title: "No-Test", description: nil, url: nil, urlToImage: nil, publishedAt: nil)),
-            DNCellViewModel(article:News(author: "ojha", title: "test", description: nil, url: nil, urlToImage: nil, publishedAt: nil)),
-            DNCellViewModel(article:News(author: "ojha", title: "Testing", description: nil, url: nil, urlToImage: nil, publishedAt: nil)),
-            DNCellViewModel(article:News(author: "Bindu", title: "world", description: nil, url: nil, urlToImage: nil, publishedAt: nil))
+            TableCellViewModel(article:Article(author: "bindu", title: "Testing", description: "", url: nil, urlToImage: nil, publishedAt: nil)),
+            TableCellViewModel(article:Article(author: "bindu", title: "World", description: nil, url: nil, urlToImage: nil, publishedAt: nil)),
+            TableCellViewModel(article:Article(author: "prakash", title: "No-Test", description: nil, url: nil, urlToImage: nil, publishedAt: nil)),
+            TableCellViewModel(article:Article(author: "ojha", title: "test", description: nil, url: nil, urlToImage: nil, publishedAt: nil)),
+            TableCellViewModel(article:Article(author: "ojha", title: "Testing", description: nil, url: nil, urlToImage: nil, publishedAt: nil)),
+            TableCellViewModel(article:Article(author: "Bindu", title: "world", description: nil, url: nil, urlToImage: nil, publishedAt: nil))
         ]
 
         tableViewModel.tableData = articles
@@ -181,18 +181,18 @@ class DailyNewsTableViewModelTest: XCTestCase {
     }
     
     func test_LoadWebPageWhenGivenValidUrl_LoadPageSuccess(){
-        let url = URL(string: "https://www.google.com")!
-        let coordinator = SpyCoordinator()
+        let urlString = "https://www.google.com"
+        let coordinator = SpyTableViewCoordinator()
         tableViewModel.coordinator = coordinator
-        tableViewModel.loadWebPage(url: url)
+        tableViewModel.loadWebPage(urlString: urlString)
         XCTAssertEqual(coordinator.pageLoadCount, 1)
     }
     
     func test_LoadWebPageWhenGivenInValidUrl_LoadPageShowAlert(){
-        let url = URL(string: "")
-        let coordinator = SpyCoordinator()
+        let urlString = ""
+        let coordinator = SpyTableViewCoordinator()
         tableViewModel.coordinator = coordinator
-        tableViewModel.loadWebPage(url: url)
+        tableViewModel.loadWebPage(urlString: urlString)
         XCTAssertEqual(coordinator.alertCount, 1)
     }
 
